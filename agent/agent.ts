@@ -5,6 +5,6 @@ export default defineAgent({
   compaction: {
     thresholdPercent: 0.25,
   },
-  model: openai("gpt-6.1-sol"),
+  model: openai("gpt-6-luna"),
   reasoning: "high",
 });
