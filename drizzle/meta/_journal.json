@@ -8,6 +8,13 @@
       "when": 1790263901283,
       "tag": "0000_complex_thunderbolts",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1790663836883,
+      "tag": "0001_known_nemesis",
+      "breakpoints": true
     }
   ]
 }

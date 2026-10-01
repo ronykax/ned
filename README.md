@@ -21,7 +21,7 @@ this project is highly customized for my personal needs. if you like how ned wor
     BASE_URL=... # tunnel URL
     CLOUDFLARE_TUNNEL_TOKEN=... # optional
 
-    AI_GATEWAY_API_KEY=...
+    OPENAI_API_KEY=...
 
     DATABASE_URL=...
     DATABASE_AUTH_TOKEN=... # optional if local sqlite
@@ -50,9 +50,9 @@ this project is highly customized for my personal needs. if you like how ned wor
 
 ## todo
 
-- [x] kv memory
-- [ ] memory
+- [x] memory
 - [x] dynamic scheduling
 - [x] sandbox
 - [x] compaction
-- [x] cua subagent
+- [ ] cua subagent
+- [ ] make schedules channel specific

@@ -9,7 +9,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
     "deploy": "eve deploy",
-    "dev": "eve dev",
+    "dev": "eve dev --no-default-extensions",
     "eval": "eve eval",
     "fix": "ultracite fix",
     "start": "eve start",
@@ -20,14 +20,14 @@
     "@libsql/client": "^0.18.0",
     "@supermemory/eve": "^0.1.1",
     "drizzle-orm": "^0.45.3",
-    "eve": "^0.67.0",
+    "eve": "^0.68.0",
     "zod": "^4.6.5"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",
     "@types/node": "24.x",
     "drizzle-kit": "^0.31.11",
-    "just-bash": "^3.4.2",
+    "microsandbox": "^0.5.5",
     "typescript": "^7.0.2",
     "ultracite": "^7.12.0"
   },

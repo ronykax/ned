@@ -7,8 +7,3 @@ export const schedulesTable = sqliteTable("schedules", {
   minutes: integer("minutes").notNull(),
   recurring: integer("recurring", { mode: "boolean" }).notNull(),
 });
-
-export const profileTable = sqliteTable("profile", {
-  key: text("key").primaryKey(),
-  value: text("value").notNull(),
-});
