@@ -20,14 +20,13 @@
     "@libsql/client": "^0.18.0",
     "@supermemory/eve": "^0.1.1",
     "drizzle-orm": "^0.45.3",
-    "eve": "^0.69.0",
+    "eve": "^0.70.0",
     "zod": "^4.6.5"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.14",
     "@types/node": "24.x",
     "drizzle-kit": "^0.31.11",
-    "microsandbox": "^0.5.5",
     "typescript": "^7.0.2",
     "ultracite": "^7.12.0"
   },

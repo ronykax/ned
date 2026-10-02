@@ -3,15 +3,17 @@ import { z } from "zod";
 import { db } from "../lib/db";
 import { schedulesTable } from "../lib/db/schema";
 
+const SCHEDULE_LIMIT = 20;
+
 export default defineTool({
   description: "Create a one-off or recurring schedule.",
   execute: async ({ recurring, minutes, instructions }, _ctx) => {
     try {
       const existingSchedules = await db.select().from(schedulesTable);
 
-      if (existingSchedules.length >= 10) {
+      if (existingSchedules.length >= SCHEDULE_LIMIT) {
         throw new RangeError(
-          "Schedule limit reached (10/10). Call list_schedules, remove one you no longer need, then create this schedule again."
+          `Schedule limit reached (${SCHEDULE_LIMIT}/${SCHEDULE_LIMIT}). Call list_schedules, remove one that's no longer needed, then try again.`
         );
       }
 
@@ -25,7 +27,7 @@ export default defineTool({
 
       return "Ok.";
     } catch (error) {
-      throw new Error("Something went wrong.", { cause: error });
+      throw new RangeError("Something went wrong.", { cause: error });
     }
   },
   inputSchema: z.object({
