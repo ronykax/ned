@@ -54,5 +54,8 @@ this project is highly customized for my personal needs. if you like how ned wor
 - [x] dynamic scheduling
 - [x] sandbox
 - [x] compaction
-- [ ] cua subagent
 - [ ] make schedules channel specific
+
+## unusable
+- agent-browser
+- computer-use

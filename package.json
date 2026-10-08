@@ -18,9 +18,10 @@
   },
   "dependencies": {
     "@libsql/client": "^0.18.0",
-    "@supermemory/eve": "^0.1.1",
+    "@supermemory/eve": "^0.1.2",
+    "braintrust": "^3.37.0",
     "drizzle-orm": "^0.45.3",
-    "eve": "^0.71.2",
+    "eve": "^0.74.0",
     "zod": "^4.6.5"
   },
   "devDependencies": {

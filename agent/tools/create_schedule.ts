@@ -13,7 +13,7 @@ export default defineTool({
 
       if (existingSchedules.length >= SCHEDULE_LIMIT) {
         throw new RangeError(
-          `Schedule limit reached (${SCHEDULE_LIMIT}/${SCHEDULE_LIMIT}). Call list_schedules, remove one that's no longer needed, then try again.`
+          `Schedule limit reached (${SCHEDULE_LIMIT}/${SCHEDULE_LIMIT}). Call list_schedules, see if there's one that's no longer needed, remove it, and then try again.`
         );
       }
 
@@ -25,7 +25,7 @@ export default defineTool({
         recurring,
       });
 
-      return "Ok.";
+      return "ok";
     } catch (error) {
       throw new RangeError("Something went wrong.", { cause: error });
     }
