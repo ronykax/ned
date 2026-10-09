@@ -1,9 +1,14 @@
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 
-const client = createClient({
-  authToken: process.env.DATABASE_AUTH_TOKEN,
-  url: process.env.DATABASE_URL as string,
-});
+let instance: ReturnType<typeof drizzle> | undefined;
 
-export const db = drizzle({ client });
+export function db() {
+  instance ??= drizzle({
+    client: createClient({
+      authToken: process.env.DATABASE_AUTH_TOKEN,
+      url: process.env.DATABASE_URL as string,
+    }),
+  });
+  return instance;
+}

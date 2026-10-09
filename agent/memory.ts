@@ -6,7 +6,7 @@ export default defineMemory({
   description: "Recall and manage durable context.",
   namespace: "ned",
   provider: supermemory({
-    apiKey: process.env.SUPERMEMORY_API_KEY as string,
+    apiKey: () => process.env.SUPERMEMORY_API_KEY as string,
   }),
   scope: byPrincipal,
 });

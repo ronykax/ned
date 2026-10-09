@@ -7,7 +7,7 @@ export default defineTool({
   description: "List all schedules.",
   execute: async () => {
     try {
-      return await db.select().from(schedulesTable);
+      return await db().select().from(schedulesTable);
     } catch (error) {
       throw new Error("Something went wrong.", { cause: error });
     }

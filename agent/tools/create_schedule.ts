@@ -9,7 +9,7 @@ export default defineTool({
   description: "Create a one-off or recurring schedule.",
   execute: async ({ recurring, minutes, instructions }, _ctx) => {
     try {
-      const existingSchedules = await db.select().from(schedulesTable);
+      const existingSchedules = await db().select().from(schedulesTable);
 
       if (existingSchedules.length >= SCHEDULE_LIMIT) {
         throw new RangeError(
@@ -17,7 +17,7 @@ export default defineTool({
         );
       }
 
-      await db.insert(schedulesTable).values({
+      await db().insert(schedulesTable).values({
         id: crypto.randomUUID(),
         instructions,
         lastRunAt: new Date(),

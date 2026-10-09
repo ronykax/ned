@@ -1,0 +1,11 @@
+.git
+.eve
+.output
+node_modules
+.env*
+ned.png
+README.md
+AGENTS.md
+.agents
+.vscode
+.DS_Store

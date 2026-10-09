@@ -8,7 +8,7 @@ export default defineTool({
   description: "Delete a schedule by its ID.",
   execute: async ({ id }) => {
     try {
-      await db.delete(schedulesTable).where(eq(schedulesTable.id, id));
+      await db().delete(schedulesTable).where(eq(schedulesTable.id, id));
       return "ok";
     } catch (error) {
       throw new Error("Something went wrong.", { cause: error });

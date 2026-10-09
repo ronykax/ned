@@ -9,7 +9,7 @@ export default defineSchedule({
   run({ to, waitUntil, appAuth }) {
     waitUntil(
       (async () => {
-        const schedules = await db.select().from(schedulesTable);
+        const schedules = await db().select().from(schedulesTable);
 
         await Promise.all(
           schedules.map(async (schedule) => {
@@ -25,13 +25,13 @@ export default defineSchedule({
               { auth: appAuth }
             );
 
-            await db
+            await db()
               .update(schedulesTable)
               .set({ lastRunAt: new Date(now) })
               .where(eq(schedulesTable.id, schedule.id));
 
             if (!schedule.recurring) {
-              await db
+              await db()
                 .delete(schedulesTable)
                 .where(eq(schedulesTable.id, schedule.id));
             }
