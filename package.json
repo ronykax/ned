@@ -1,6 +1,7 @@
 {
   "name": "ned",
   "version": "0.1.0",
+  "type": "module",
   "scripts": {
     "build": "eve build",
     "check": "ultracite check",
