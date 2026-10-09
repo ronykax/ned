@@ -22,6 +22,7 @@
     "braintrust": "^3.37.0",
     "drizzle-orm": "^0.45.3",
     "eve": "^0.74.0",
+    "just-bash": "^3.6.0",
     "zod": "^4.6.5"
   },
   "devDependencies": {
