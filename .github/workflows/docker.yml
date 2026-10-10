@@ -21,3 +21,6 @@ jobs:
         with:
           push: true
           tags: ghcr.io/${{ github.repository }}:latest
+      - run: curl -fsS -X POST "$PORTAINER_WEBHOOK"
+        env:
+          PORTAINER_WEBHOOK: ${{ secrets.PORTAINER_WEBHOOK }}
