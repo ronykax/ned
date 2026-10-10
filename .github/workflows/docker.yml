@@ -19,6 +19,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/build-push-action@v6
         with:
+          context: .
           push: true
           tags: ghcr.io/${{ github.repository }}:latest
       - run: curl -fsS -X POST "$PORTAINER_WEBHOOK"

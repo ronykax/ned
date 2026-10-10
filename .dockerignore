@@ -1,4 +1,5 @@
 .git
+.github
 .eve
 .output
 node_modules
@@ -9,3 +10,5 @@ AGENTS.md
 .agents
 .vscode
 .DS_Store
+docker-compose.yml
+.gitignore

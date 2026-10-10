@@ -48,6 +48,30 @@ this project is highly customized for my personal needs. if you like how ned wor
 
 - run `node --env-file=.env scripts/setup-discord.js` to register an `ask` command and configure the interactions endpoint URL.
 
+## docker compose
+
+ned is deployed on K1, my $6 VPS which uses portainer.
+
+```yml
+services:
+  ned:
+    image: ghcr.io/ronykax/ned:latest
+    restart: unless-stopped
+    env_file: stack.env
+    volumes:
+      - ned_data:/app/.eve
+    networks:
+      - caddy
+
+volumes:
+  ned_data:
+    external: true
+
+networks:
+  caddy:
+    external: true
+```
+
 ## todo
 
 - [x] memory

@@ -11,7 +11,6 @@
     "db:studio": "drizzle-kit studio",
     "deploy": "eve deploy",
     "dev": "eve dev --no-default-extensions",
-    "docker:build": "docker build -t ned .",
     "eval": "eve eval",
     "fix": "ultracite fix",
     "start": "eve start",
