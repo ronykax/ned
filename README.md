@@ -7,10 +7,11 @@ ned is a personal agent.
 - [ ] memory repo
 - [ ] dynamic scheduling
 - [ ] agent-browser
-- [ ] compaction
+- [x] compaction
 - [ ] imessage
 - [ ] tui
 - [x] observability
+- [ ] store `messages` in `src/agent.ts` per session, since channels are not awaited (to allow for a synchronous chatting experience)
 
 ## imessage
 
