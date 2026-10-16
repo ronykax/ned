@@ -1,6 +1,15 @@
+import { registerTelemetry } from "ai";
+import { braintrustAISDKTelemetry, initLogger } from "braintrust";
 import { Elysia } from "elysia";
 import { Webhook } from "standardwebhooks";
 import { imessage } from "./channels/imessage";
+
+initLogger({
+  apiKey: process.env.BRAINTRUST_API_KEY,
+  projectName: "ned",
+});
+
+registerTelemetry(braintrustAISDKTelemetry());
 
 const webhook = new Webhook(
   process.env.PHOTON_WEBHOOK_SIGNING_SECRET as string
