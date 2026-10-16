@@ -3,8 +3,9 @@
   "private": true,
   "scripts": {
     "check": "ultracite check",
+    "dev": "bun --watch src",
     "fix": "ultracite fix",
-    "start": "bun --watch src",
+    "start": "bun src",
     "tunnel": "source .env && cloudflared tunnel run --token \"$CLOUDFLARE_TUNNEL_TOKEN\"",
     "typecheck": "bun check"
   },
