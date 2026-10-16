@@ -10,7 +10,7 @@ ned is a personal agent.
 - [ ] compaction
 - [ ] imessage
 - [ ] tui
-- [ ] observability
+- [x] observability
 
 ## imessage
 
