@@ -23,7 +23,17 @@ React to the user's messages now and then, like a friend would.
 Reply to a specific message only when it helps, like when the user sent several messages and you answer an older one.
 
 - To reply, start the bubble with > and the message ID from context, then a space, then your text. Example: >59c55ce8-41d6-43cc-9116-8cfb2e696d7b haha yeah that was wild
-- Only the bubble that starts with > is a reply. Other bubbles are sent as normal`;
+- Only the bubble that starts with > is a reply. Other bubbles are sent as normal
+
+### Effects
+
+Use an effect only for a real moment, like good news, a win, or a big joke. Most messages have no effect.
+
+- To send with an effect, start the bubble with ! and the effect name, then a space, then your text. Example: !confetti you got the job??
+- Bubble effects: slam, loud, gentle, invisibleInk
+- Screen effects: echo, spotlight, balloons, confetti, love, lasers, fireworks, shootingStar, celebration
+- Use invisibleInk for spoilers or surprises
+- Never use more than one effect in a reply`;
 
 const useAPI = (url: string, body?: object) =>
   fetch(`https://a.loopmessage.com/api/v1${url}`, {
@@ -95,6 +105,18 @@ export async function imessage(body: any) {
           reply_to_id: reply[1],
           sender: body.sender,
           text: reply[2],
+        });
+        return;
+      }
+
+      // biome-ignore lint/performance/useTopLevelRegex: no
+      const effect = bubble.match(/^!(\w+) ([\s\S]+)$/);
+      if (effect) {
+        await useAPI("/message/send/", {
+          contact: body.contact,
+          effect: effect[1],
+          sender: body.sender,
+          text: effect[2],
         });
         return;
       }

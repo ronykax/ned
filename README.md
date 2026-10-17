@@ -26,4 +26,5 @@ i want ned on imessage to feel as human as possible, by allowing him to use 90% 
 - [x] inbound replies
 - [x] outbound replies
 - [x] stream bubbles
-- [ ] effects
+- [ ] inbound effects
+- [x] outbound effects
