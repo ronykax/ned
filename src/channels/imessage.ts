@@ -1,4 +1,5 @@
 import { ned } from "../agent";
+import { eachBubble } from "../lib/utils";
 
 const instructions = `## iMessage
 
@@ -23,23 +24,37 @@ export async function imessage(body: any) {
   }
 
   if (body.event === "message_inbound") {
-    const result = await ned({
-      content: body.text_markdown,
-      extraInstructions: instructions,
-      sessionId: body.contact,
-    });
-
-    await fetch("https://a.loopmessage.com/api/v1/message/send/", {
+    await fetch("https://a.loopmessage.com/api/v1/message/show-typing/", {
       body: JSON.stringify({
-        contact: body.contact,
-        sender: body.sender,
-        text: await result.text,
+        message_id: body.message_id,
+        typing: 60,
       }),
       headers: {
         Authorization: process.env.LOOP_MESSAGE_API_KEY as string,
         "Content-Type": "application/json",
       },
       method: "POST",
+    });
+
+    const result = await ned({
+      content: body.text_markdown,
+      extraInstructions: instructions,
+      sessionId: body.contact,
+    });
+
+    await eachBubble(result.textStream, async (text) => {
+      await fetch("https://a.loopmessage.com/api/v1/message/send/", {
+        body: JSON.stringify({
+          contact: body.contact,
+          sender: body.sender,
+          text,
+        }),
+        headers: {
+          Authorization: process.env.LOOP_MESSAGE_API_KEY as string,
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
     });
   }
 }
