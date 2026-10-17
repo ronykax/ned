@@ -5,7 +5,7 @@
     "check": "ultracite check",
     "dev": "bun --watch src",
     "fix": "ultracite fix",
-    "start": "bun src",
+    "start": "bun src/index.ts",
     "tunnel": "source .env && cloudflared tunnel run --token \"$CLOUDFLARE_TUNNEL_TOKEN\"",
     "typecheck": "bun check"
   },
