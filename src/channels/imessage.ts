@@ -33,7 +33,13 @@ Use an effect only for a real moment, like good news, a win, or a big joke. Most
 - Bubble effects: slam, loud, gentle, invisibleInk
 - Screen effects: echo, spotlight, balloons, confetti, love, lasers, fireworks, shootingStar, celebration
 - Use invisibleInk for spoilers or surprises
-- Never use more than one effect in a reply`;
+- Never use more than one effect in a reply
+
+### Combining
+
+- A reply can have an effect. Put the reply first, then the effect. Example: >59c55ce8-41d6-43cc-9116-8cfb2e696d7b !confetti no way you got it
+- A reaction is always its own bubble with nothing else
+- To react and also say something, send the reaction bubble, then a normal bubble`;
 
 const useAPI = (url: string, body?: object) =>
   fetch(`https://a.loopmessage.com/api/v1${url}`, {
@@ -85,6 +91,10 @@ export async function imessage(body: any) {
     });
 
     await eachBubble(result.textStream, async (bubble) => {
+      if (!bubble) {
+        return;
+      }
+
       // biome-ignore lint/performance/useTopLevelRegex: no
       const react = bubble.match(/^\+(\S+) ([\w-]+)$/);
       if (react) {
@@ -97,34 +107,30 @@ export async function imessage(body: any) {
         return;
       }
 
+      let text = bubble;
+      let reply_to_id: string | undefined;
+      let effect: string | undefined;
+
       // biome-ignore lint/performance/useTopLevelRegex: no
-      const reply = bubble.match(/^>([\w-]+) ([\s\S]+)$/);
-      if (reply) {
-        await useAPI("/message/send/", {
-          contact: body.contact,
-          reply_to_id: reply[1],
-          sender: body.sender,
-          text: reply[2],
-        });
-        return;
+      const [, replyId, replyText] = text.match(/^>([\w-]+) ([\s\S]+)$/) ?? [];
+      if (replyId && replyText) {
+        reply_to_id = replyId;
+        text = replyText;
       }
 
       // biome-ignore lint/performance/useTopLevelRegex: no
-      const effect = bubble.match(/^!(\w+) ([\s\S]+)$/);
-      if (effect) {
-        await useAPI("/message/send/", {
-          contact: body.contact,
-          effect: effect[1],
-          sender: body.sender,
-          text: effect[2],
-        });
-        return;
+      const [, fxName, fxText] = text.match(/^!(\w+) ([\s\S]+)$/) ?? [];
+      if (fxName && fxText) {
+        effect = fxName;
+        text = fxText;
       }
 
       await useAPI("/message/send/", {
         contact: body.contact,
+        effect,
+        reply_to_id,
         sender: body.sender,
-        text: bubble,
+        text,
       });
     });
   }
