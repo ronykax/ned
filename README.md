@@ -20,10 +20,10 @@ ned is a personal agent.
 
 i want ned on imessage to feel as human as possible, by allowing him to use 90% of the features that the channel provides.
 
-- [ ] outbound typing indicators
+- [x] outbound typing indicators
 - [ ] inbound reactions
-- [ ] outbound reactions
-- [ ] inbound replies
-- [ ] outbound replies
-- [ ] stream bubbles
+- [x] outbound reactions
+- [x] inbound replies
+- [x] outbound replies
+- [x] stream bubbles
 - [ ] effects
