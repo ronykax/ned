@@ -25,20 +25,18 @@ Reply to a specific message only when it helps, like when the user sent several 
 - To reply, start the bubble with > and the message ID from context, then a space, then your text. Example: >59c55ce8-41d6-43cc-9116-8cfb2e696d7b haha yeah that was wild
 - Only the bubble that starts with > is a reply. Other bubbles are sent as normal`;
 
-const useAPI = (url: string, body: object) =>
+const useAPI = (url: string, body?: object) =>
   fetch(`https://a.loopmessage.com/api/v1${url}`, {
-    body: JSON.stringify(body),
+    body: body && JSON.stringify(body),
     headers: {
       Authorization: process.env.LOOP_MESSAGE_API_KEY as string,
       "Content-Type": "application/json",
     },
-    method: "POST",
+    method: body ? "POST" : "GET",
   });
 
 // biome-ignore lint/suspicious/noExplicitAny: loop message inbound stuff is untyped
 export async function imessage(body: any) {
-  console.log("\nBODY", JSON.stringify(body, null, 2), "\n");
-
   if (body.channel !== "imessage") {
     return;
   }
@@ -49,9 +47,22 @@ export async function imessage(body: any) {
       typing: 60,
     });
 
+    let replyingTo: string | undefined;
+    if (body.thread) {
+      const res = await useAPI(
+        `/message/status/${body.thread.initial_message_id}/`
+      );
+
+      if (res.ok) {
+        // biome-ignore lint/suspicious/noExplicitAny: no
+        replyingTo = ((await res.json()) as any).text;
+      }
+    }
+
     const context = makeContext({
       channel: "iMessage",
       "message ID": body.message_id,
+      ...(replyingTo && { "replying to": replyingTo }),
     });
 
     const result = await ned({
