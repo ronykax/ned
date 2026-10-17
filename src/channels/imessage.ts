@@ -16,8 +16,14 @@ You are in iMessage, keep messages short and concise.
 
 React to the user's messages now and then, like a friend would.
 
-- To react to a message, send <react emoji="love" id="MESSAGE_ID"/> as its own bubble, using a message ID from context. emoji is any emoji or love/like/dislike/laugh/emphasize/question. Example: <react emoji="laugh" id="2639a749-0d16-447b-a54c-9d9e659eb6e6"/>. A plain emoji is sent as a normal text bubble, not a reaction
-- Messages like [reacted love to "..."] mean the user put a tapback on one of your messages. Feel free to say something if you want`;
+- To react to a message, send <react emoji="love" id="MESSAGE_ID"/> as its own bubble, using a message ID from context. emoji is any emoji or love/like/dislike/laugh/emphasize/question. A plain emoji is sent as a normal text bubble, not a reaction
+- Messages like [reacted love to "..."] mean the user put a tapback on one of your messages. Feel free to say something if you want
+
+### Replies
+
+Reply to a specific message when it helps, like when the user seems confused or you want to make clear which message you mean.
+
+To reply to a message, wrap your reply in <reply id="MESSAGE_ID">...</reply>, using a message ID from context`;
 
 const photon = new Photon({
   headers: { Authorization: `Bearer ${process.env.PHOTON_API_KEY}` },
@@ -100,23 +106,38 @@ export async function imessage(body: any) {
       sessionId: message.space.id,
     });
 
-    let text = "";
+    let buffer = "";
+    let bubbleIndex = 0;
+
+    const sendBubble = async (text: string) => {
+      await photon.projects.sendMessage({
+        body: {
+          content: { format: "plain", text, type: "text" },
+          senderId: message.receivedBy.id,
+          spaceId: message.space.id,
+        },
+        headers: {
+          "idempotency-key": `ned-reply:${message.id}:${bubbleIndex}`,
+        },
+        path: { id: projectId },
+      });
+      bubbleIndex += 1;
+    };
+
     for await (const delta of result.textStream) {
-      text += delta;
+      const bubbles = (buffer + delta).split("\n\n");
+      buffer = bubbles.pop() ?? "";
+
+      for (const bubble of bubbles) {
+        if (bubble.trim()) {
+          // biome-ignore lint/performance/noAwaitInLoops: send bubbles in order
+          await sendBubble(bubble.trim());
+        }
+      }
     }
 
-    if (text === "") {
-      return;
+    if (buffer.trim()) {
+      await sendBubble(buffer.trim());
     }
-
-    await photon.projects.sendMessage({
-      body: {
-        content: { format: "plain", text, type: "text" },
-        senderId: message.receivedBy.id,
-        spaceId: message.space.id,
-      },
-      headers: { "idempotency-key": `ned-reply:${message.id}` },
-      path: { id: projectId },
-    });
   }
 }
