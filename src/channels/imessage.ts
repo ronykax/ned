@@ -72,13 +72,18 @@ export async function imessage(body: any) {
 
     const result = await ned(message.space.id, parts);
 
-    if (!result.text) {
+    let text = "";
+    for await (const delta of result.textStream) {
+      text += delta;
+    }
+
+    if (text === "") {
       return;
     }
 
     await photon.projects.sendMessage({
       body: {
-        content: { format: "plain", text: result.text, type: "text" },
+        content: { format: "plain", text, type: "text" },
         senderId: message.receivedBy.id,
         spaceId: message.space.id,
       },

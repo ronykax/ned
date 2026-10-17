@@ -3,6 +3,7 @@ import { braintrustAISDKTelemetry, initLogger } from "braintrust";
 import { Elysia } from "elysia";
 import { Webhook } from "standardwebhooks";
 import { imessage } from "./channels/imessage";
+import { clearScreen } from "./lib/utils";
 
 initLogger({
   apiKey: process.env.BRAINTRUST_API_KEY,
@@ -31,6 +32,7 @@ new Elysia()
   })
   .listen(process.env.PORT ?? 3000);
 
+clearScreen();
 console.log(`
 ▄▄  ▄▄ ▄▄▄▄▄ ▄▄▄▄ 
 ███▄██ ██▄▄  ██▀██

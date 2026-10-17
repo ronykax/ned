@@ -53,8 +53,11 @@ export async function ned(sessionId: string, content: UserContent) {
   }
 
   messages.push({ content, role: "user" });
-  const result = await agent.generate({ messages });
-  messages.push(...result.responseMessages);
 
-  return result;
+  return await agent.stream({
+    messages,
+    onEnd: ({ responseMessages }) => {
+      messages.push(...responseMessages);
+    },
+  });
 }
