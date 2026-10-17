@@ -1,5 +1,5 @@
 import { ned } from "../agent";
-import { eachBubble } from "../lib/utils";
+import { eachBubble, makeContext } from "../lib/utils";
 
 const instructions = `## iMessage
 
@@ -14,46 +14,84 @@ You are in iMessage, keep messages short and concise.
 
 React to the user's messages now and then, like a friend would.
 
-- To react to a message, send <react emoji="love" id="MESSAGE_ID"/> as its own bubble, using a message ID from context. emoji is any emoji or love/like/dislike/laugh/emphasize/question. A plain emoji is sent as a normal text bubble, not a reaction
-- Messages like [reacted love to "..."] mean the user put a tapback on one of your messages. Feel free to say something if you want`;
+- To react, send a bubble with only a plus sign, the reaction, a space, and the message ID from context. Example: +love 59c55ce8-41d6-43cc-9116-8cfb2e696d7b
+- The reaction can be love, like, dislike, laugh, emphasize, question, or any single emoji
+- A reaction bubble has nothing else in it
+
+### Replies
+
+Reply to a specific message only when it helps, like when the user sent several messages and you answer an older one.
+
+- To reply, start the bubble with > and the message ID from context, then a space, then your text. Example: >59c55ce8-41d6-43cc-9116-8cfb2e696d7b haha yeah that was wild
+- Only the bubble that starts with > is a reply. Other bubbles are sent as normal`;
+
+const useAPI = (url: string, body: object) =>
+  fetch(`https://a.loopmessage.com/api/v1${url}`, {
+    body: JSON.stringify(body),
+    headers: {
+      Authorization: process.env.LOOP_MESSAGE_API_KEY as string,
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+  });
 
 // biome-ignore lint/suspicious/noExplicitAny: loop message inbound stuff is untyped
 export async function imessage(body: any) {
+  console.log("\nBODY", JSON.stringify(body, null, 2), "\n");
+
   if (body.channel !== "imessage") {
     return;
   }
 
   if (body.event === "message_inbound") {
-    await fetch("https://a.loopmessage.com/api/v1/message/show-typing/", {
-      body: JSON.stringify({
-        message_id: body.message_id,
-        typing: 60,
-      }),
-      headers: {
-        Authorization: process.env.LOOP_MESSAGE_API_KEY as string,
-        "Content-Type": "application/json",
-      },
-      method: "POST",
+    await useAPI("/message/show-typing/", {
+      message_id: body.message_id,
+      typing: 60,
+    });
+
+    const context = makeContext({
+      channel: "iMessage",
+      "message ID": body.message_id,
     });
 
     const result = await ned({
-      content: body.text_markdown,
+      content: [
+        { text: context, type: "text" },
+        { text: body.text_markdown, type: "text" },
+      ],
       extraInstructions: instructions,
       sessionId: body.contact,
     });
 
-    await eachBubble(result.textStream, async (text) => {
-      await fetch("https://a.loopmessage.com/api/v1/message/send/", {
-        body: JSON.stringify({
+    await eachBubble(result.textStream, async (bubble) => {
+      // biome-ignore lint/performance/useTopLevelRegex: no
+      const react = bubble.match(/^\+(\S+) ([\w-]+)$/);
+      if (react) {
+        await useAPI("/message/send/", {
           contact: body.contact,
+          message_id: react[2],
+          reaction: react[1],
           sender: body.sender,
-          text,
-        }),
-        headers: {
-          Authorization: process.env.LOOP_MESSAGE_API_KEY as string,
-          "Content-Type": "application/json",
-        },
-        method: "POST",
+        });
+        return;
+      }
+
+      // biome-ignore lint/performance/useTopLevelRegex: no
+      const reply = bubble.match(/^>([\w-]+) ([\s\S]+)$/);
+      if (reply) {
+        await useAPI("/message/send/", {
+          contact: body.contact,
+          reply_to_id: reply[1],
+          sender: body.sender,
+          text: reply[2],
+        });
+        return;
+      }
+
+      await useAPI("/message/send/", {
+        contact: body.contact,
+        sender: body.sender,
+        text: bubble,
       });
     });
   }
