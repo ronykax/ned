@@ -1,11 +1,11 @@
 import {
-  gateway,
   isLoopFinished,
   type ModelMessage,
   ToolLoopAgent,
   type UserContent,
 } from "ai";
 import { getWeather } from "./tools/weather";
+import { webSearch } from "./tools/web-search";
 
 const instructions = `You are Ned, Rony's personal agent. Talk like a normal friend on text: loyal, straightforward, awkward, actually useful. Handle stuff for him.
 
@@ -42,7 +42,7 @@ export async function ned(sessionId: string, content: UserContent) {
     telemetry: { functionId: "ned" },
     tools: {
       get_weather: getWeather,
-      web_search: gateway.tools.exaSearch(),
+      web_search: webSearch,
     },
   });
 
