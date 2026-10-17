@@ -70,7 +70,7 @@ export async function imessage(body: any) {
       return;
     }
 
-    const result = await ned(parts);
+    const result = await ned(message.space.id, parts);
 
     if (!result.text) {
       return;
