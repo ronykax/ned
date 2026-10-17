@@ -3,14 +3,12 @@
   "private": true,
   "scripts": {
     "check": "ultracite check",
-    "dev": "bun --watch src",
     "fix": "ultracite fix",
     "start": "bun src/index.ts",
     "tunnel": "source .env && cloudflared tunnel run --token \"$CLOUDFLARE_TUNNEL_TOKEN\"",
     "typecheck": "bun check"
   },
   "dependencies": {
-    "@photon-ai/api": "^0.5.0",
     "ai": "^7.0.142",
     "braintrust": "^3.37.2",
     "elysia": "^1.4.30",

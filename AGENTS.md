@@ -7,7 +7,6 @@ Ned is a personal agent. Learn more about this project in `README.md`.
 - **AI SDK**: `ai-sdk` skill
 - **Glacier**: `glacier/README.md`
 - **Agent Memory Repo**: https://cognition.com/agent-memory-repo
-- **Photon Beta**: docs MCP (`photon`). Webhook/event shapes are OpenAPI schemas (e.g. `ImessageMessageReceivedEvent`). Beta only (`pho_prj_...`) — not Stable/Spectrum.
 
 ## Rules
 

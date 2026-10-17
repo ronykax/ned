@@ -1,0 +1,10 @@
+name: glacier
+
+services:
+  glacier:
+    container_name: glacier
+    image: ghcr.io/ronykax/glacier:latest
+    init: true
+    restart: unless-stopped
+    volumes:
+      - ~/Desktop/glacier:/workspace

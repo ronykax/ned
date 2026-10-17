@@ -5,7 +5,6 @@
     "": {
       "name": "agent",
       "dependencies": {
-        "@photon-ai/api": "^0.5.0",
         "ai": "^7.0.142",
         "braintrust": "^3.37.2",
         "elysia": "^1.4.30",
@@ -146,8 +145,6 @@
     "@nodelib/fs.stat": ["@nodelib/fs.stat@2.0.5", "", {}, "sha512-RkhPPp2zrqDAQA/2jNhnztcPAlv64XdhIp7a7454A5ovI7Bukxgt7MX7udwAu3zg1DcpPU0rz3VV1SeaqvY4+A=="],
 
     "@nodelib/fs.walk": ["@nodelib/fs.walk@1.2.8", "", { "dependencies": { "@nodelib/fs.scandir": "2.1.5", "fastq": "^1.6.0" } }, "sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg=="],
-
-    "@photon-ai/api": ["@photon-ai/api@0.5.0", "", { "dependencies": { "zod": "^4.6.5" } }, "sha512-vCjN5RviZAcgKkD1CzJXYgz6pitXljM70Vo8x3ZhvWcvgwrRIolf4+14Iw43uqCIVI6RuDIGN5aONQVcvN5sWw=="],
 
     "@sec-ant/readable-stream": ["@sec-ant/readable-stream@0.4.1", "", {}, "sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg=="],
 
