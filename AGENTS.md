@@ -25,6 +25,7 @@ Ned is a personal agent. Learn more about this project in `README.md`.
 ### Code
 
 - Write simple code.
+- Build on top of what exists. Don't replace the architecture, types, or data structures that already work; add the new behavior beside them and keep it straightforward.
 - No framework hacks. Use the AI SDK the way it's meant to be used, and do the same for every other library.
 - Format with `bunx ultracite fix`; check with `bunx ultracite check`.
 - Prefer `unknown` over `any`; use `as const` and type narrowing over assertions.
