@@ -37,16 +37,8 @@ const instructions = `You are Ned, Rony's personal agent. Talk like a normal fri
 
 const sessions = new Map<string, ModelMessage[]>();
 
-export async function ned({
-  content,
-  extraInstructions,
-  sessionId,
-}: {
-  content: UserContent;
-  extraInstructions?: string;
-  sessionId: string;
-}) {
-  const agent = new ToolLoopAgent({
+export function getAgent(extraInstructions?: string) {
+  return new ToolLoopAgent({
     allowSystemInMessages: true,
     instructions: instructions.replace(
       "{extraInstructions}",
@@ -61,6 +53,18 @@ export async function ned({
       web_search: webSearch,
     },
   });
+}
+
+export async function ned({
+  content,
+  extraInstructions,
+  sessionId,
+}: {
+  content: UserContent;
+  extraInstructions?: string;
+  sessionId: string;
+}) {
+  const agent = getAgent(extraInstructions);
 
   let messages = sessions.get(sessionId);
   if (!messages) {

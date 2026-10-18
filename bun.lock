@@ -6,6 +6,7 @@
       "name": "agent",
       "dependencies": {
         "@ai-sdk/openai": "^4.0.96",
+        "@ai-sdk/tui": "^1.0.144",
         "ai": "^7.0.143",
         "braintrust": "^3.37.2",
         "elysia": "^1.4.30",
@@ -30,6 +31,8 @@
     "@ai-sdk/provider": ["@ai-sdk/provider@4.0.29", "", { "dependencies": { "json-schema": "^0.4.0" } }, "sha512-nV7UpLADtKn9f0xfnxVZAeFEKuNkScJv5rOpHL7qeWe2EwEEBa3pd6P0QVK6D6coCJ0E8FyCgoM50AffTYrzDQ=="],
 
     "@ai-sdk/provider-utils": ["@ai-sdk/provider-utils@5.0.62", "", { "dependencies": { "@ai-sdk/provider": "4.0.29", "@standard-schema/spec": "^1.1.0", "@workflow/serde": "4.1.0", "eventsource-parser": "^3.0.8", "undici": "^7.29.0" }, "peerDependencies": { "zod": "^3.25.76 || ^4.1.8" } }, "sha512-//6sHa6QNQdM2KHOg5pxp1UMFQB4U8cqdw/kSm9BMr0DLeaFgG3TXZfxhpwRZmxgBpOrzMVZ/gwLXH309+Ortw=="],
+
+    "@ai-sdk/tui": ["@ai-sdk/tui@1.0.144", "", { "dependencies": { "ai": "7.0.143" } }, "sha512-5FvicUb8w1Iz+I2m/XHIjtWPbWglaAEYs1V2ITBrJjbgNBl3cfozX6TZN00XVUQ4HdBkWlz9FD/4ijStLm+NNg=="],
 
     "@babel/helper-string-parser": ["@babel/helper-string-parser@7.29.7", "", {}, "sha512-Pb5ijPrZ89GDH8223L4UP8i6QApWxs04RbPQJTeWDV0/keR2E36MeKnyr6LYmUUvqRRI+Iv87SuF1W6ErINzYw=="],
 

@@ -9,10 +9,12 @@ ned is a personal agent.
 - [ ] agent-browser
 - [ ] compaction
 - [x] imessage
-- [ ] tui
+- [x] tui
 - [ ] sandbox
 - [x] observability
 - [x] store `messages` in `src/agent.ts` per session, since channels are not awaited (to allow for a synchronous chatting experience)
+- [ ] tools
+- [ ] skills
 
 ## imessage
 

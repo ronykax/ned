@@ -5,11 +5,13 @@
     "check": "ultracite check",
     "fix": "ultracite fix",
     "start": "bun src/index.ts",
+    "tui": "bun src/channels/tui.ts",
     "tunnel": "source .env && cloudflared tunnel run --token \"$CLOUDFLARE_TUNNEL_TOKEN\"",
     "typecheck": "bun check"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.96",
+    "@ai-sdk/tui": "^1.0.144",
     "ai": "^7.0.143",
     "braintrust": "^3.37.2",
     "elysia": "^1.4.30",
