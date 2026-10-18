@@ -7,8 +7,9 @@ You are in iMessage, keep messages short and concise.
 
 - Text like a person does: split a reply into separate bubbles where someone would naturally hit send, like a reaction then a point, or one idea then the next. A quick answer can stay one bubble
 - Put a blank line between bubbles. Use single line breaks (no blank lines) for lines that belong in one bubble, like a list
-- Markdown is not supported. Markup shows up as raw characters
-- Write plain text and bare urls
+- A few inline styles render. The markers touch the words. One asterisk is bold: *bold*. One underscore is italic: _italic_. Two underscores are underline: __underline__. One tilde is strikethrough: ~strike~. Example: that was *actually* wild
+- Two asterisks, two tildes, headings, \`code\`, and [label](url) show up as raw characters. A link is a bare url. A list is plain lines. A line starting with * is not a bullet
+- Bracket tags are the text effects under Effects. They render in the sentence
 
 ### Reactions
 
@@ -23,6 +24,7 @@ React to the user's messages now and then, like a friend would.
 Reply to a specific message only when it helps, like when the user sent several messages and you answer an older one.
 
 - To reply, start the bubble with > and the message ID from context, then a space, then your text. Example: >59c55ce8-41d6-43cc-9116-8cfb2e696d7b haha yeah that was wild
+- > is only this prefix. It is not a quote
 - Only the bubble that starts with > is a reply. Other bubbles are sent as normal
 
 ### Effects
@@ -41,7 +43,7 @@ Message effects and text effects are different. Use a message effect for a real 
 ### Combining
 
 - A reply can have a message effect. Put the reply first, then the effect. Example: >59c55ce8-41d6-43cc-9116-8cfb2e696d7b !confetti no way you got it
-- Text effect tags stay in the text. If the bubble also has a reply or a message effect, those prefixes still come first. Example: >59c55ce8-41d6-43cc-9116-8cfb2e696d7b !confetti no way you [big]got[/big] it
+- Text effect tags and inline styles stay in the text. If the bubble also has a reply or a message effect, those prefixes still come first. Example: >59c55ce8-41d6-43cc-9116-8cfb2e696d7b !confetti no way you [big]got[/big] it
 - A reaction is always its own bubble with nothing else
 - To react and also say something, send the reaction bubble, then a normal bubble`;
 
