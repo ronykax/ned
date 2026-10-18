@@ -17,7 +17,7 @@ Ned is a personal agent. Learn more about this project in `README.md`.
 - Never look inside `.env`. Assume every variable in `.env.example` is defined in the real `.env`.
 - This is a Bun project. Use `bun` and `bunx`. Don't use `npm`, `pnpm`, `yarn`, or any other package manager.
 - Prefer running the scripts in `package.json` over running their commands directly.
-- When editing a prompt, reason through the patterns before writing. The system prompt is `instructions` in `src/agent.ts`. Each file under `src/channels` has its own `instructions`, appended as `extraInstructions`. Read how that prompt is shaped, how it fits the other one, and very importantly: how the surrounding code treats the model's output.
+- When editing a prompt, reason through the patterns before writing. Read how that prompt is shaped, how it fits the other one, and very importantly: how the surrounding code treats the model's output.
 - When the prompt is about something specific, research it before writing. The constraints and the wording that works are usually already out there.
 - Say the answer in one or two sentences, then only the fact that changes what to do next.
 - Use the real names and examples. Skip file tours, caveats, and later plans.
@@ -25,7 +25,6 @@ Ned is a personal agent. Learn more about this project in `README.md`.
 ### Code
 
 - Write simple code.
-- Build on top of what exists. Don't replace the architecture, types, or data structures that already work; add the new behavior beside them and keep it straightforward.
 - No framework hacks. Use the AI SDK the way it's meant to be used, and do the same for every other library.
 - Format with `bunx ultracite fix`; check with `bunx ultracite check`.
 - Prefer `unknown` over `any`; use `as const` and type narrowing over assertions.
