@@ -9,7 +9,8 @@
     "typecheck": "bun check"
   },
   "dependencies": {
-    "ai": "^7.0.142",
+    "@ai-sdk/openai": "^4.0.96",
+    "ai": "^7.0.143",
     "braintrust": "^3.37.2",
     "elysia": "^1.4.30",
     "standardwebhooks": "^1.1.1",

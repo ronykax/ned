@@ -1,3 +1,3 @@
-import { gateway } from "ai";
+import { openai } from "@ai-sdk/openai";
 
-export const webSearch = gateway.tools.exaSearch();
+export const webSearch = openai.tools.webSearch();

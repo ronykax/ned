@@ -1,3 +1,4 @@
+import { openai } from "@ai-sdk/openai";
 import {
   isLoopFinished,
   type ModelMessage,
@@ -51,8 +52,8 @@ export async function ned({
       "{extraInstructions}",
       extraInstructions ? `\n${extraInstructions}\n` : ""
     ),
-    model: "stealth/cat-jam",
-    reasoning: "xhigh",
+    model: openai("gpt-6.1-sol"),
+    reasoning: "high",
     stopWhen: isLoopFinished(),
     telemetry: { functionId: "ned" },
     tools: {
