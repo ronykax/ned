@@ -1,7 +1,7 @@
 import { ned } from "../agent";
 import { eachBubble, makeContext } from "../lib/utils";
 
-const instructions = `## Channel
+const instructions = `## CHANNEL
 
 You are in iMessage, keep messages short and concise.
 
