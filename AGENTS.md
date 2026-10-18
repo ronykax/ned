@@ -19,6 +19,8 @@ Ned is a personal agent. Learn more about this project in `README.md`.
 - Prefer running the scripts in `package.json` over running their commands directly.
 - When editing a prompt, reason through the patterns before writing. The system prompt is `instructions` in `src/agent.ts`. Each file under `src/channels` has its own `instructions`, appended as `extraInstructions`. Read how that prompt is shaped, how it fits the other one, and very importantly: how the surrounding code treats the model's output.
 - When the prompt is about something specific, research it before writing. The constraints and the wording that works are usually already out there.
+- Say the answer in one or two sentences, then only the fact that changes what to do next.
+- Use the real names and examples. Skip file tours, caveats, and later plans.
 
 ### Code
 

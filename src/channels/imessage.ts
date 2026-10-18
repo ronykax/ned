@@ -47,6 +47,45 @@ Message effects and text effects are different. Use a message effect for a real 
 - A reaction is always its own bubble with nothing else
 - To react and also say something, send the reaction bubble, then a normal bubble`;
 
+const reactionPattern = /^\+(\S+) ([\w-]+)$/;
+const replyPattern = /^>([\w-]+) ([\s\S]+)$/;
+const effectPattern = /^!(\w+) ([\s\S]+)$/;
+
+/** turn a bubble into a reaction, or a message with an optional reply and effect */
+export function parseBubble(bubble: string) {
+  const [, reaction, messageId] = bubble.match(reactionPattern) ?? [];
+  if (reaction && messageId) {
+    return {
+      kind: "reaction" as const,
+      messageId,
+      reaction,
+    };
+  }
+
+  let text = bubble;
+  let replyToId: string | undefined;
+  let effect: string | undefined;
+
+  const [, replyId, replyText] = text.match(replyPattern) ?? [];
+  if (replyId && replyText) {
+    replyToId = replyId;
+    text = replyText;
+  }
+
+  const [, effectName, effectText] = text.match(effectPattern) ?? [];
+  if (effectName && effectText) {
+    effect = effectName;
+    text = effectText;
+  }
+
+  return {
+    kind: "message" as const,
+    text,
+    ...(replyToId && { replyToId }),
+    ...(effect && { effect }),
+  };
+}
+
 const useAPI = (url: string, body?: object) =>
   fetch(`https://a.loopmessage.com/api/v1${url}`, {
     body: body && JSON.stringify(body),
@@ -94,11 +133,9 @@ export async function imessage(body: any) {
       handle: body.contact,
       "message ID": body.message_id,
 
-      // reply context
       ...(replyingToHandle && { "replying to handle": replyingToHandle }),
       ...(replyingTo && { "replying to": replyingTo }),
 
-      // message effect
       ...(body.effect && { effect: body.effect }),
     });
 
@@ -118,42 +155,23 @@ export async function imessage(body: any) {
         return;
       }
 
-      // biome-ignore lint/performance/useTopLevelRegex: no
-      const react = bubble.match(/^\+(\S+) ([\w-]+)$/);
-      if (react) {
+      const parsed = parseBubble(bubble);
+      if (parsed.kind === "reaction") {
         await useAPI("/message/send/", {
           contact: body.contact,
-          message_id: react[2],
-          reaction: react[1],
+          message_id: parsed.messageId,
+          reaction: parsed.reaction,
           sender: body.sender,
         });
         return;
       }
 
-      let text = bubble;
-      let reply_to_id: string | undefined;
-      let effect: string | undefined;
-
-      // biome-ignore lint/performance/useTopLevelRegex: no
-      const [, replyId, replyText] = text.match(/^>([\w-]+) ([\s\S]+)$/) ?? [];
-      if (replyId && replyText) {
-        reply_to_id = replyId;
-        text = replyText;
-      }
-
-      // biome-ignore lint/performance/useTopLevelRegex: no
-      const [, fxName, fxText] = text.match(/^!(\w+) ([\s\S]+)$/) ?? [];
-      if (fxName && fxText) {
-        effect = fxName;
-        text = fxText;
-      }
-
       await useAPI("/message/send/", {
         contact: body.contact,
-        effect,
-        reply_to_id,
+        effect: parsed.effect,
+        reply_to_id: parsed.replyToId,
         sender: body.sender,
-        text,
+        text: parsed.text,
       });
     });
   }
