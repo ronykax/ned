@@ -62,7 +62,7 @@ export async function imessage(body: any) {
   }
 
   if (body.event === "message_inbound") {
-    console.log("\nBODY", JSON.stringify(body, null, 2), "\n");
+    // console.log("\nBODY", JSON.stringify(body, null, 2), "\n");
 
     await useAPI("/message/show-typing/", {
       message_id: body.message_id,
@@ -103,7 +103,9 @@ export async function imessage(body: any) {
     const result = await ned({
       content: [
         { text: context, type: "text" },
-        { text: body.text_markdown, type: "text" },
+        ...(body.text_markdown
+          ? [{ text: body.text_markdown, type: "text" as const }]
+          : []),
       ],
       extraInstructions: instructions,
       sessionId: body.contact,
