@@ -7,7 +7,7 @@ ned is a personal agent.
 - [ ] memory repo
 - [ ] dynamic scheduling
 - [ ] agent-browser
-- [ ] compaction
+- [x] compaction
 - [x] imessage
 - [x] tui
 - [ ] sandbox
