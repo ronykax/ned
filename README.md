@@ -8,13 +8,11 @@ ned is a personal agent.
 - [ ] dynamic scheduling
 - [ ] agent-browser
 - [ ] compaction
-- [ ] imessage
+- [x] imessage
 - [ ] tui
 - [ ] sandbox
 - [x] observability
 - [x] store `messages` in `src/agent.ts` per session, since channels are not awaited (to allow for a synchronous chatting experience)
-- [ ] set turn policy to steer
-- [x] stream replies
 
 ## imessage
 
@@ -25,6 +23,12 @@ i want ned on imessage to feel as human as possible, by allowing him to use 90% 
 - [x] outbound reactions
 - [x] inbound replies
 - [x] outbound replies
+- [x] inbound message effects
+- [x] outbound message effects
+- [x] outbound message effects
+- [ ] inbound markdown
+- [ ] outbound markdown
 - [x] stream bubbles
-- [ ] inbound effects
-- [x] outbound effects
+- [ ] turn policy set to steer
+- [ ] trunate inbound replies in context IF it's not in the memory of the current session
+- [ ] explain <context> in instructions
