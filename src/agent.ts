@@ -6,7 +6,7 @@ import {
   ToolLoopAgent,
   type UserContent,
 } from "ai";
-import { sandbox } from "./sandbox";
+import { sandbox } from "./sandbox/session";
 import { readBinaryFile } from "./tools/sandbox/read-binary-file";
 import { readFile } from "./tools/sandbox/read-file";
 import { readTextFile } from "./tools/sandbox/read-text-file";
