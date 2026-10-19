@@ -6,6 +6,7 @@ import {
   ToolLoopAgent,
   type UserContent,
 } from "ai";
+import { sandbox } from "./sandbox";
 import { getWeather } from "./tools/weather";
 import { webSearch } from "./tools/web-search";
 
@@ -355,6 +356,7 @@ function realStart(session: Session, attempt: Attempt) {
   const agent = createAgent(session.extraInstructions, attempt.fold);
   return agent.stream({
     abortSignal: attempt.abortSignal,
+    experimental_sandbox: sandbox,
     messages: attempt.messages,
     onStepEnd: ({ response }) => {
       attempt.onStepEnd(response.messages);
