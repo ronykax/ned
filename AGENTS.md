@@ -13,7 +13,7 @@ Ned is a personal agent. Learn more about this project in `README.md`.
 ### General
 
 - Ask questions if you're unsure about something or if the request isn't specific enough.
-- The user is usually very specific about what they want, so don't do anything they didn't ask for. But if a request seems wrong or doesn't make sense, point it out and ask before going ahead.
+- If a request seems wrong or doesn't make sense, point it out and ask before going ahead.
 - Never look inside `.env`. Assume every variable in `.env.example` is defined in the real `.env`.
 - This is a Bun project. Use `bun` and `bunx`. Don't use `npm`, `pnpm`, `yarn`, or any other package manager.
 - Prefer running the scripts in `package.json` over running their commands directly.

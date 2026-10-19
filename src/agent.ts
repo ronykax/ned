@@ -7,6 +7,14 @@ import {
   type UserContent,
 } from "ai";
 import { sandbox } from "./sandbox";
+import { readBinaryFile } from "./tools/sandbox/read-binary-file";
+import { readFile } from "./tools/sandbox/read-file";
+import { readTextFile } from "./tools/sandbox/read-text-file";
+import { run as runCommand } from "./tools/sandbox/run";
+import { spawn } from "./tools/sandbox/spawn";
+import { writeBinaryFile } from "./tools/sandbox/write-binary-file";
+import { writeFile } from "./tools/sandbox/write-file";
+import { writeTextFile } from "./tools/sandbox/write-text-file";
 import { getWeather } from "./tools/weather";
 import { webSearch } from "./tools/web-search";
 
@@ -72,7 +80,15 @@ function createAgent(
     telemetry: { functionId: "ned" },
     tools: {
       get_weather: getWeather,
+      read_binary_file: readBinaryFile,
+      read_file: readFile,
+      read_text_file: readTextFile,
+      run: runCommand,
+      spawn,
       web_search: webSearch,
+      write_binary_file: writeBinaryFile,
+      write_file: writeFile,
+      write_text_file: writeTextFile,
     },
   });
 }
