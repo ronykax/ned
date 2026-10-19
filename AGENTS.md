@@ -12,14 +12,15 @@ Ned is a personal agent. Learn more about this project in `README.md`.
 
 ### General
 
-- Ask questions if you're unsure about something or if the request isn't specific enough.
+- Ask questions if you're unsure about something or if the request is very vague.
 - If a request seems wrong or doesn't make sense, point it out and ask before going ahead.
 - Never look inside `.env`. Assume every variable in `.env.example` is defined in the real `.env`.
 - This is a Bun project. Use `bun` and `bunx`. Don't use `npm`, `pnpm`, `yarn`, or any other package manager.
 - Prefer running the scripts in `package.json` over running their commands directly.
 - When editing a prompt, reason through the patterns before writing. Read how that prompt is shaped, how it fits the other one, and very importantly: how the surrounding code treats the model's output.
 - When the prompt is about something specific, research it before writing. The constraints and the wording that works are usually already out there.
-- Say the answer in one or two sentences, then only the fact that changes what to do next.
+- Explain technical things so they make sense. Simple and straightforward, at the level of the idea: one connected explanation, not an answer to each question in turn, and not low-level detail.
+- For a decision or a next step, say it in one or two sentences, then only the fact that changes what to do next.
 - Use the real names and examples. Skip file tours, caveats, and later plans.
 
 ### Code
