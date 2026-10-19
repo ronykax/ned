@@ -22,6 +22,7 @@ Ned is a personal agent. Learn more about this project in `README.md`.
 - Explain technical things so they make sense. Simple and straightforward, at the level of the idea: one connected explanation, not an answer to each question in turn, and not low-level detail.
 - For a decision or a next step, say it in one or two sentences, then only the fact that changes what to do next.
 - Use the real names and examples. Skip file tours, caveats, and later plans.
+- Repeat the noun when a pronoun would make the reader look back. "It", "that", "they", "this", and "there" are only clear when the referent is the subject of the clause just before. Example: "A new Glacier instance is created in `boot.ts`. The Glacier instance is used in `run.ts`."
 
 ### Code
 
